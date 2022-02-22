@@ -5,7 +5,8 @@
 
 // O nome declarado no "directive" como o "meuPainel" abaixo sera acessado como "meu-painel" no HTML.
 // Ou <div meu-painel></div meu-painel>
-angular.module('minhasDiretivas', []).directive('meuPainel', function() {
+angular.module('minhasDiretivas', [])
+.directive('meuPainel', function() {
 		
 		// Directive Definition Object (DDO)
 		// Diretivas podem ser usadas como E*lemento, *Atributo ou C*omentário
@@ -34,4 +35,36 @@ angular.module('minhasDiretivas', []).directive('meuPainel', function() {
         ddo.templateUrl = "js/directives/meu-painel.html";
 
         return ddo;
-    });
+    })
+
+// Diretiva que exibi a foto durante o cadastro
+.directive('minhaFoto', function() {
+
+        var ddo = {};
+
+        ddo.restrict = "AE";
+
+        ddo.scope = {
+            titulo: '@',
+            url: '@'
+        };
+
+        ddo.templateUrl = "js/directives/minha-foto.html";           
+        
+        return ddo;
+})
+.directive('meuBotaoPerigo', function() {
+
+        var ddo = {};
+
+        ddo.restrict = "E";
+
+        ddo.scope = {
+            nome: '@',
+            acao : '&' // O "&" serve quando deve ser executadas funções. (".remover(foto)")
+        }
+
+         ddo.templateUrl = "js/directives/meu-botao.html";
+
+        return ddo;
+});

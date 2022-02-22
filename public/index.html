@@ -2,6 +2,10 @@
 <html lang="pt-br" ng-app="alurapic"><!-- Chamada do modulo no AngularJS -->
     <head>
         <meta charset="UTF-8">
+
+        <!-- Define a raíz do projeto para o sistema de Single Page Application -->
+        <base href="/">
+
         <meta name="viewport" content="width=device-width">
         <title>Alurapic</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -13,49 +17,27 @@
         <!-- Imports necessarios para o AngularJS -->
         <script src="js/lib/angular.min.js"></script>
         <script src="js/main.js"></script>
+
+        <!-- Imports necessarios dos controllers do AngularJS -->
         <script src="js/controllers/fotos-controller.js"></script>
+        <script src="js/controllers/foto-controller.js"></script>
+        <script src="js/controllers/grupos-controller.js"></script>
 
         <!-- Imports necessarios para as animações do AngularJS -->
         <script src="js/lib/angular-animate.min.js"></script>
 
+        <!-- Imports necessarios para as rotas do AngularJS (Single Page Applications) -->
+        <script src="js/lib/angular-route.min.js"></script>
+
         <!-- JavaScript contendo as diretivas do AngularJS (HTML customizado) -->
         <script src="js/directives/minhas-diretivas.js"></script>
 
+
     </head>
-    <body ng-controller="FotosController"><!-- Chamada do controller no AngularJS -->
+    <body>
         <div class="container">
-            <!-- Container com título da página -->
-            <div class="jumbotron">
-                <h1 class="text-center">Alurapic</h1>
-            </div>
-
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <form>
-                        <!-- O atribulo ng-model="filtro" passa o que foi digitado para o objeto "$scope.filtro". Two-Way Data Binding = Lê e escreve -->
-
-                        <!-- O atribulo ng-model-options="{ debounce: 500 }" adiciona um delay depois que o último digito antes de iniciar a filtragem. Serve para não realizar o filtro antes de termino da digitação. -->
-
-                        <input ng-model="filtro" class="form-control" placeholder="filtrar pelo título da foto" ng-model-options="{ debounce: 500 }">
-                    </form>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-
-                <!-- Atributo "titulo" tem o mesmo nome do "ddo.scope" -->
-
-                <!-- Atributo ng-repeat=" | filter: filtro" recebe como filter o objeto "$scope.filtro" que são os valores digitados no input -->
-
-                <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter:filtro" titulo="{{foto.titulo}}">
-                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-                </meu-painel>
-
-            </div>
-
+            <!-- opa! abri uma mega lacuna! -->        
+            <ng-view></ng-view>
         </div>    
     </body>
 </html>

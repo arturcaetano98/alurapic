@@ -4,8 +4,6 @@
 // Os valores declarados substituem o src="{{foto.url}}" alt="{{foto.titulo}}" no HTML atraves de um Binding Data.
 
 
-
-
 /* É necessario adicionar um $http para realizar as consultas AJAX. */
 /* A ordem dos paramentro na function não interferem no funcionamento. (Injeção de dependência não tem ordem.) */
 angular.module('alurapic').controller('FotosController', function($scope, $http) {
@@ -25,9 +23,6 @@ angular.module('alurapic').controller('FotosController', function($scope, $http)
     // Objeto que armazena o texto digitado na barra de filtros.
     // Two-Way Data Binding (lendo e escrevendo dados atraves de Angular Expressions).
     $scope.filtro = '';
-
-
-
 
     // Realizando a construção da galeria com requisições AJAX (http://localhost:3000/v1/fotos)
 
@@ -54,5 +49,26 @@ angular.module('alurapic').controller('FotosController', function($scope, $http)
         console.log(erro);
     });
 
+
+    // Código responsavel por remover as fotos da lista.
+    // Recebe como parametro o valor de "ng-repeat" do elemento da lista.
+    $scope.remover = function(foto) {
+        // Realiza a remoção do elemento cadastrado utilizando o "._id".
+        $http.delete('/v1/fotos/' + foto._id)
+        .success(function() {
+
+            // Busca o indice do elemento a ser removido
+            var indiceDaFoto = $scope.fotos.indexOf(foto);
+
+            // Remove o inten da lista visualmente
+            $scope.fotos.splice(indiceDaFoto, 1);
+
+            console.log('Foto ' + foto.titulo + ' removida com sucesso!'); // Mensagem de sucesso
+
+        })
+        .error(function(erro) {
+            console.log('Não foi possível apagar a foto ' + foto.titulo); // Mensagem de erro
+        });
+    };
 
 });

@@ -1,0 +1,45 @@
+<!--body ng-controller="FotosController"--><!-- Chamada do controller no AngularJS -->
+    <!-- Container com título da página -->
+    <div class="jumbotron">
+        <h1 class="text-center">Alurapic</h1>
+    </div>
+
+<!-- Mensagem de exclusão -->
+<p ng-show="mensagem.length" class="alert alert-info">
+    {{mensagem}}
+</p>
+
+<div class="input-group">
+    <span class="input-group-btn">
+        <a href="/fotos/new" class="btn btn-primary" type="button">
+            Nova foto
+        </a>
+    </span>
+
+    <!-- O atribulo ng-model="filtro" passa o que foi digitado para o objeto "$scope.filtro". Two-Way Data Binding = Lê e escreve -->
+
+    <!-- O atribulo ng-model-options="{ debounce: 500 }" adiciona um delay depois que o último digito antes de iniciar a filtragem. Serve para não realizar o filtro antes de termino da digitação. -->
+
+    <input class="form-control" placeholder="filtrar pelo título da foto" ng-model="filtro" ng-model-options="{ debounce: 500 }">
+</div>
+
+<br>
+
+<div class="row">
+    <!-- Atributo "titulo" tem o mesmo nome do "ddo.scope" -->
+
+    <!-- Atributo ng-repeat=" | filter: filtro" recebe como filter o objeto "$scope.filtro" que são os valores digitados no input -->
+
+    <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter:filtro" titulo="{{foto.titulo}}">
+        <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+        <br>
+
+        <!-- Função de editar foi incluida no "fotos-controller" -->
+        <!-- O "href" passa a "Angular Expression" com o "._id" do elemento do "ng-repeat" no link. -->
+
+        <a class="btn btn-primary btn-block" href="/fotos/edit/{{foto._id}}">Editar</a>
+        <br>
+        <meu-botao-perigo nome="Remover" acao="remover(foto)"></meu-botao-perigo>
+    </meu-painel>
+</div>
+<!--/body>       
